@@ -172,3 +172,23 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# 🛠️ Configuración del sistema/IDE
+*.DS_Store
+.idea/
+.vscode/
+# 🚀 AWS SAM y Terraform
+.aws-sam/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+
+
+# 🔒 Credenciales y configuraciones sensibles
+*.pem
+*.key
+*.crt
+*.p12
+*.db
+*.sqlite3

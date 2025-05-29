@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ordenes
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U usuario -d mi_base_datos"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # API FastAPI
+  fastapi:
+    build: .  # Construye desde el Dockerfile en el directorio actual
+    # O usa una imagen si ya la tienes: image: mi-fastapi:latest
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.development  # Usa tu archivo de entorno existente
+    environment:
+      - PYTHONPATH=/app
+      - DB_HOST=postgres  # Sobrescribe solo el host para Docker
+    volumes:
+      - .:/app  # Monta el código para desarrollo
+    depends_on:
+      postgres:
+        condition: service_healthy
+      db_init:
+        condition: service_completed_successfully
+    networks:
+      - app-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Inicialización de la base de datos
+  db_init:
+    build: .
+    container_name: db_init
+    env_file:
+      - .env.development
+    environment:
+      - PYTHONPATH=/app
+      - DB_HOST=postgres
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    command: python app/api/v1/utils/init_db.py
+    restart: "no"  # Solo se ejecuta una vez
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

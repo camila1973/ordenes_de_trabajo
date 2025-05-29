@@ -20,3 +20,5 @@ def get_db():
         yield db
     finally:
         db.close()
+
+print("Loaded DB_USER:", settings.db_user)

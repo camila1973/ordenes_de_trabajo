@@ -17,5 +17,5 @@ class User(Base):
     role = relationship("Role", back_populates="users")
 
 
-class Role:
-    pass
+# class Role:
+#     pass

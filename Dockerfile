@@ -6,12 +6,17 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
     gcc \
+    libffi-dev \
+    libssl-dev \
+    python3-dev \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Copiar archivos de dependencias
 COPY requirements.txt .
 
 # Instalar dependencias de Python
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el código de la aplicación

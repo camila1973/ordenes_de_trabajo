@@ -25,7 +25,7 @@ services:
   # API FastAPI
   fastapi:
     build: .  # Construye desde el Dockerfile en el directorio actual
-    # O usa una imagen si ya la tienes: image: mi-fastapi:latest
+
     container_name: fastapi_app
     ports:
       - "8000:8000"
@@ -33,7 +33,7 @@ services:
       - .env.development  # Usa tu archivo de entorno existente
     environment:
       - PYTHONPATH=/app
-      - DB_HOST=postgres  # Sobrescribe solo el host para Docker
+      - DB_HOST=postgres
     volumes:
       - .:/app  # Monta el código para desarrollo
     depends_on:

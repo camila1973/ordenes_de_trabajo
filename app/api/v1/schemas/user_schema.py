@@ -1,5 +1,7 @@
 from pydantic import BaseModel, EmailStr
 
+from app.api.v1.schemas.role_schema import RoleOut
+
 
 class UserCreate(BaseModel):
     name: str
@@ -20,7 +22,7 @@ class UserResponse(BaseModel):
     email: str
     phone: str
     username: str
-    role_id: int
+    role: RoleOut
 
     class Config:
         from_attributes = True

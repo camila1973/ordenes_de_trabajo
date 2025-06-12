@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-
 from app.api.v1.utils.db import Base
 
 class Brand(Base):

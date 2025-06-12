@@ -14,4 +14,3 @@ class Company(Base):
 
     city_id=Column(Integer, ForeignKey('cities.id'))
     city= relationship("City", back_populates="companies")
-

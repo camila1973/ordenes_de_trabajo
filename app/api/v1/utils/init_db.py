@@ -10,8 +10,19 @@ from app.api.v1.utils.settings import settings
 dotenv_path = Path(__file__).resolve().parents[4] / ".env.development"
 load_dotenv(dotenv_path)
 print("dotenv_path: ", dotenv_path)
+
 from app.api.v1.models.user import User
+from app.api.v1.models.SIM import SIM
 from app.api.v1.models.role import Role
+from app.api.v1.models.bolsa import Bolsa
+from app.api.v1.models.brandGps import Brand
+from app.api.v1.models.city import City
+from app.api.v1.models.company import Company
+from app.api.v1.models.equipment import Equipment
+from app.api.v1.models.firmware import Firmware
+from app.api.v1.models.GPS import GPS
+
+from app.api.v1.models.technical_office import TechnicalOffice
 
 def init_db():
     print("Conectando y creando tablas en la base de datos...")

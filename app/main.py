@@ -6,7 +6,9 @@ from starlette.middleware.cors import CORSMiddleware
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 from fastapi import FastAPI
-from app.api.v1.routers import auth, role
+from app.api.v1.models import *
+
+from app.api.v1.routers import auth, role, city, bolsa, sim, company, GPS
 
 app = FastAPI()
 
@@ -26,6 +28,12 @@ app.include_router(auth.router)
 
 app.include_router(role.router)
 
-print("📋 Rutas activas:")
-for route in app.router.routes:
-    print(route.path)
+app.include_router(city.router)
+
+app.include_router(bolsa.router)
+
+app.include_router(sim.router)
+
+app.include_router(company.router)
+
+app.include_router(GPS.router)

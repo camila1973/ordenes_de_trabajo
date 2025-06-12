@@ -13,4 +13,7 @@ class GPS(Base):
     brand_id=Column(Integer, ForeignKey("brands.id"))
     brand=relationship("Brand", back_populates="gps_devices")
 
+    sim_id=Column(Integer, ForeignKey("sim.id"))
+    SIM=relationship("SIM", back_populates="gps_device", uselist=False)
+
     equipment=relationship("Equipment", back_populates="gps_equipment",uselist=False)

@@ -5,7 +5,7 @@ from app.api.v1.utils.db import Base
 
 
 class Firmware(Base):
-    __tablename__ = 'firmwares'
+    __tablename__ = 'firmware'
     id=Column(Integer, primary_key=True, index=True)
     name=Column(String, unique=True, index=True)
     description = Column(String)

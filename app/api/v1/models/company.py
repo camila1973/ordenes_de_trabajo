@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
+from app.api.v1.models.company_owner import company_owner
 from app.api.v1.utils.db import Base
 
 
@@ -14,3 +15,5 @@ class Company(Base):
 
     city_id=Column(Integer, ForeignKey('cities.id'))
     city= relationship("City", back_populates="companies")
+
+    owners=relationship("Owner",secondary=company_owner , back_populates="companies")

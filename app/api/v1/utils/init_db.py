@@ -21,6 +21,10 @@ from app.api.v1.models.company import Company
 from app.api.v1.models.equipment import Equipment
 from app.api.v1.models.firmware import Firmware
 from app.api.v1.models.GPS import GPS
+from app.api.v1.models.owner import Owner
+from app.api.v1.models.company_owner import company_owner
+from app.api.v1.models.busType import BusType
+
 
 from app.api.v1.models.technical_office import TechnicalOffice
 

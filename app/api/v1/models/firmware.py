@@ -9,8 +9,8 @@ class Firmware(Base):
     id=Column(Integer, primary_key=True, index=True)
     name=Column(String, unique=True, index=True)
     description = Column(String)
-    archivo1 = Column(String, nullable=True)  # No obligatorio
-    archivo2 = Column(String, nullable=True)  # No obligatorio
+    archivo1 = Column(String, nullable=True)
+    archivo2 = Column(String, nullable=True)
 
     equipments=relationship("Equipment", back_populates="firmware_equipment")
 

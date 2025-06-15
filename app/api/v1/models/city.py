@@ -1,7 +1,5 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from app.api.v1.models.company import Company
-from app.api.v1.models.technical_office import TechnicalOffice
 from app.api.v1.utils.db import Base
 
 class City(Base):
@@ -9,5 +7,5 @@ class City(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
 
-    companies = relationship(Company, back_populates="city")
-    technical_offices = relationship(TechnicalOffice, back_populates="city")
+    companies = relationship("Company", back_populates="city")
+    technical_offices = relationship("TechnicalOffice", back_populates="city")

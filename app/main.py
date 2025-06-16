@@ -8,7 +8,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 from fastapi import FastAPI
 from app.api.v1.models import *
 
-from app.api.v1.routers import auth, role, city, bolsa, sim, company, GPS, owner
+from app.api.v1.routers import auth, role, city, bolsa, sim, company, GPS, owner, technicalOffice, busType
 
 app = FastAPI()
 
@@ -25,16 +25,14 @@ def ping():
 
 print("📦 Incluyendo routers...")
 app.include_router(auth.router)
-
 app.include_router(role.router)
-
 app.include_router(city.router)
-
 app.include_router(bolsa.router)
-
 app.include_router(sim.router)
-
 app.include_router(company.router)
 
 app.include_router(GPS.router)
 app.include_router(owner.router)
+app.include_router(technicalOffice.router)
+
+app.include_router(busType.router)

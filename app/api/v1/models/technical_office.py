@@ -8,7 +8,7 @@ class TechnicalOffice(Base):
     __tablename__='technical_offices'
 
     id=Column(Integer , primary_key=True , index=True)
-    name=Column(String, index=True)
+    name=Column(String, index=True, unique=True)
 
     city_id=Column(Integer, ForeignKey('cities.id'))
     city=relationship("City", back_populates="technical_offices")

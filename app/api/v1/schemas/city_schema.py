@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel, constr
 
 
@@ -9,3 +11,6 @@ class CityResponse(BaseModel):
     name: str
     class Config:
         from_attributes = True
+
+class CityUpdateDto(BaseModel):
+    name: Optional[str] = None

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel, EmailStr
 
 from app.api.v1.schemas.city_schema import CityResponse
@@ -25,3 +27,10 @@ class CompanyOut(BaseModel):
     city:CityResponse
     class Config:
         from_attributes = True
+
+class CompanyUpdate(BaseModel):
+    name: Optional[str]
+    email: Optional[EmailStr]
+    phone: Optional[str]
+    address: Optional[str]
+    city_id: Optional[int]

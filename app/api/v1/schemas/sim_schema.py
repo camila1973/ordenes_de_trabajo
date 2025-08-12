@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 from app.api.v1.schemas.bolsa_schema import BolsaOut
 
@@ -13,3 +15,8 @@ class SimOut(BaseModel):
     IMEI_sim: str
     phone:str
     bolsa:BolsaOut
+
+class SimUpdate(BaseModel):
+    IMEI_sim: Optional[str] = None
+    phone: Optional[str] = None
+    bolsa_id: Optional[int] = None

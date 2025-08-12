@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from app.api.v1.models import Company
-from app.api.v1.schemas.company_schema import CompanyCreate
+from app.api.v1.schemas.company_schema import CompanyCreate, CompanyUpdate
 
 
 def create_company(db: Session, company_data:CompanyCreate):
@@ -33,3 +33,18 @@ def get_companies(db: Session):
             status_code=500,
             detail="Error al obtener las empresas."
         )
+
+def update_company(company_id: int, data: CompanyUpdate, db: Session):
+    company = db.query(Company).filter(Company.id == company_id).first()
+
+    if not company:
+        raise HTTPException(status_code=404, detail="Empresa no encontrada")
+
+    update_data = data.dict(exclude_unset=True)
+
+    for key, value in update_data.items():
+        setattr(company, key, value)
+
+    db.commit()
+    db.refresh(company)
+    return company

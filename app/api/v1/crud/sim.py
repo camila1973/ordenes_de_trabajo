@@ -31,3 +31,15 @@ def get_sims(db: Session):
             status_code=500,
             detail="Error al obtener las SIMs."
         )
+
+def update_sim(db:Session, sim_id:int, update_sim:dict):
+    sim_db = db.query(SIM).filter(SIM.id == sim_id).first()
+    if not sim_db:
+        raise HTTPException(status_code=404, detail="sim not found")
+
+    for key, value in update_sim.items():
+        setattr(sim_db, key, value)
+
+    db.commit()
+    db.refresh(sim_db)
+    return sim_db
